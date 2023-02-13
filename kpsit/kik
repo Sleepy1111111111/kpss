@@ -1,0 +1,43 @@
+<?php
+include 'database.php' ;
+$stmt = $pdo->query("SELECT* FROM post");
+$r = $stmt->fetch();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {background-color:wheat;}
+        h1 {color: #086100;}
+        p {background-color: yellowgreen;}
+        label {background-color: rgb(164, 197, 212);}
+        
+     </style>
+
+</head>
+<body>
+<h1>สวัสดีวัยรุ่นเขียวเหลือง</h1>
+   
+    <form method="post">
+    <label for="post">แปะความรู้</label><br>
+        <input type="text" id="post" name="post">
+        <input type="submit">
+</form>
+<?php 
+foreach($r as $a){echo $a.'<br>';}
+$x=$_POST ["post"] ;
+echo $x  ;
+$stm = $pdo->prepare("INSERT INTO post (post,idpos) VALUES (?,0);");
+
+$stm->execute([$x]);
+ ?>
+
+
+
+</body>
+</html>
